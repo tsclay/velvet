@@ -57,25 +57,27 @@
     position: absolute;
     box-sizing: border-box;
     width: 100%;
-    height: 0;
     bottom: 0;
     transform: translateY(100%);
     left: 0;
     border-radius: 0 0 4px 4px;
     background: rgb(255, 250, 241);
-  }
-
-  .folding-animation {
     max-height: 210px;
     overflow-y: auto;
+    height: 210px;
+    transition: height 0.2s linear;
   }
 
-  .folding-animation > div {
+  .dropdown-menu:empty {
+    height: 0;
+  }
+
+  .dropdown-menu > div {
     padding: 4px;
     cursor: pointer;
   }
 
-  .folding-animation > div:after {
+  .dropdown-menu > div:after {
     content: "";
     width: 0;
     display: block;
@@ -85,7 +87,7 @@
     transition: width 0.2s linear;
   }
 
-  .folding-animation > div:hover::after {
+  .dropdown-menu > div:hover::after {
     content: "";
     width: 90%;
     display: block;
@@ -119,12 +121,7 @@
       on:click|stopPropagation={(e) => {
         showOptions = !showOptions;
       }}>
-      <button
-        type="button"
-        on:click|stopPropagation={(e) => {
-          showOptions = !showOptions;
-        }}
-        class="svg-wrapper">
+      <button type="button" class="svg-wrapper">
         <svg
           xmlns:svg="http://www.w3.org/2000/svg"
           xmlns="http://www.w3.org/2000/svg"
@@ -143,15 +140,13 @@
     </div>
 
     <div class="dropdown-menu">
-      <div class="folding-animation">
-        {#if showOptions}
-          {#each options as option, i}
-            <div value={option.toLowerCase()} on:click={handleSelection}>
-              {option}
-            </div>
-          {/each}
-        {/if}
-      </div>
+      {#if showOptions}
+        {#each options as option, i}
+          <div value={option.toLowerCase()} on:click={handleSelection}>
+            {option}
+          </div>
+        {/each}
+      {/if}
     </div>
   </div>
 </div>
