@@ -1,4 +1,4 @@
-# Velvet
+# Velvet (still in progress!)
 
 Velvet is a library of friendly, streamlined utility components for the Svelte framework.
 
